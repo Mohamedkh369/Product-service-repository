@@ -4,6 +4,6 @@ import com.mohamedkh.productservice.DTOs.ProductDTO;
 import com.mohamedkh.productservice.Entities.Product;
 
 public interface ProductMapper {
-        ProductDTO ProductToProductDTO(Product product);
-        Product ProductDTOToProduct(ProductDTO productDTO);
+        ProductDTO productToProductDTO(Product product);
+        Product productDTOToProduct(ProductDTO productDTO);
 }

@@ -1,11 +1,9 @@
 package com.mohamedkh.productservice.Entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -14,13 +12,13 @@ import java.util.Set;
 @Table(name = "categories")
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    private String description;
     @ManyToMany(mappedBy = "categories")
     private Set<Product> products;
 }

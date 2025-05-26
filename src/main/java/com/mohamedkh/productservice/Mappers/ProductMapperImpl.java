@@ -4,13 +4,15 @@ import com.mohamedkh.productservice.DTOs.CategoryDTO;
 import com.mohamedkh.productservice.DTOs.ProductDTO;
 import com.mohamedkh.productservice.Entities.Category;
 import com.mohamedkh.productservice.Entities.Product;
+import lombok.EqualsAndHashCode;
+import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
-
+@Component
 public class ProductMapperImpl implements ProductMapper {
 
     @Override
-    public ProductDTO ProductToProductDTO(Product product){
+    public ProductDTO productToProductDTO(Product product){
         if (product == null){
             return null;
         }
@@ -18,7 +20,6 @@ public class ProductMapperImpl implements ProductMapper {
                 .id(product.getId())
                 .name(product.getName())
                 .price(product.getPrice())
-                .description(product.getDescription())
                 .image(product.getImage())
                 .sellerId(product.getSellerId())
                 .categories(
@@ -26,19 +27,15 @@ public class ProductMapperImpl implements ProductMapper {
                                 .map(category -> CategoryDTO.builder()
                                         .id(category.getId())
                                         .name(category.getName())
-                                        .description(category.getDescription())
                                         .build()
                                 )
                                 .collect(Collectors.toSet())
-
                 )
                 .build();
-
-
     }
 
     @Override
-    public Product ProductDTOToProduct(ProductDTO productDTO){
+    public Product productDTOToProduct(ProductDTO productDTO){
         if (productDTO == null){
             return null;
         }
@@ -47,22 +44,16 @@ public class ProductMapperImpl implements ProductMapper {
                 .id(productDTO.getId())
                 .name(productDTO.getName())
                 .price(productDTO.getPrice())
-                .description(productDTO.getDescription())
                 .image(productDTO.getImage())
                 .sellerId(productDTO.getSellerId())
                 .categories( productDTO.getCategories().stream()
                         .map(categoryDTO -> Category.builder()
                                 .id(categoryDTO.getId())
                                 .name(categoryDTO.getName())
-                                .description(categoryDTO.getDescription())
                                 .build()
-
                         )
                         .collect(Collectors.toSet())
-
-
                 )
                 .build();
     }
-
 }
